@@ -3,6 +3,7 @@ sudo: required
 services: docker
 
 before_install:
+  - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
   - docker-compose up --build -d
   - docker login -u "$HEROKU_USERNAME" -p "$HEROKU_API_KEY" registry.heroku.com
 
