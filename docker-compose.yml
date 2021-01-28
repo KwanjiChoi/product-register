@@ -2,10 +2,6 @@ version: '3'
 
 volumes:
   db-data:
-  app-vendor:
-  app-tmp:
-  app-log:
-  app-git:
   redis:
   bundle:
   node_modules:
@@ -22,11 +18,11 @@ services:
     volumes:
       - '.:/product-register'
       - 'bundle:/usr/local/bundle:cached'
-      - 'node_modules:/product-register/node_modules'
-      - 'app-vendor:/product-register/vendor'
-      - 'app-tmp:/product-register/tmp'
-      - 'app-log:/product-register/log'
-      - 'app-git:/product-register/.git'
+      - '/product-register/node_modules'
+      - '/product-register/vendor'
+      - '/product-register/tmp'
+      - '/product-register/log'
+      - '/product-register/.git'
     environment:
       - 'DATABASE_PASSWORD=postgres'
     tty: true
@@ -42,6 +38,7 @@ services:
     environment:
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_HOST_AUTH_METHOD=trust'
     volumes:
       - 'db-data:/var/lib/postgresql/data'
   
