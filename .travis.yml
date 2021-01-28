@@ -17,12 +17,7 @@ script:
 deploy:
   provider: script
   script:
-    docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.prod .;
-    docker push registry.heroku.com/$HEROKU_APP_NAME/web;
-    docker login -u "$HEROKU_USERNAME" -p "$HEROKU_API_KEY" registry.heroku.com;
     heroku auth:whoami;
-    heroku run --app $HEROKU_APP_NAME rails webpacker:install;
-    heroku run --app $HEROKU_APP_NAME rails db:migrate;
     
 
   on:
